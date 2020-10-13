@@ -1,49 +1,37 @@
 from flask import session
-import typing
 
 from app.models.database import *
 
 
-def get_users(last_id: int, limit: int):
-    department = session.get('department')
-
-    query = User.query.filter_by(first=department)
-
-    if last_id:
-        query = query.filter(User.id < last_id)
-
-    users: typing.List[User] = (
-        query
+def get_users():
+    return [user.to_dict() for user in (
+        User
+            .query
+            .filter_by(first=session.get('department'))
             .order_by(User.id.desc())
-            .limit(limit)
             .all()
-    )
-
-    return [user.to_dict() for user in users]
+    )]
 
 
 def update_users(first_id: int):
-    department = session.get('department')
-
-    users: typing.List[User] = (
+    return [user.to_dict() for user in (
         User
             .query
-            .filter_by(first=department)
+            .filter_by(first=session.get('department'))
             .filter(User.id > first_id)
+            .order_by(User.id.desc())
             .all()
-    )
-
-    return [user.to_dict() for user in users]
+    )]
 
 
 def get_all_users():
-    department = session.get('department')
-
-    users: typing.List[User] = (
+    return [user.to_list()[1:] for user in (
         User
             .query
-            .filter_by(first=department)
+            .filter_by(first=session.get('department'))
             .all()
-    )
+    )]
 
-    return [user.to_list()[1:] for user in users]
+
+def count():
+    return User.query.filter_by(first=session.get('department')).count()

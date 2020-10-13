@@ -2,12 +2,10 @@
 扩展
 """
 from flask_cors import CORS
-from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import Query, Session
 
 cors = CORS(supports_credentials=True)
-migrate = Migrate()
 
 
 class _SQLAlchemy(SQLAlchemy):

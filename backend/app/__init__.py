@@ -7,7 +7,7 @@ import flask_excel
 from app.config import app_config
 from app.controllers import *
 from app.extends.error import HttpError
-from app.extensions import db, migrate, cors
+from app.extensions import db, cors
 from app.middlewares import before_request
 from app.models.database import *
 
@@ -44,7 +44,6 @@ def register_blueprints(app: Flask):
 def register_extensions(app: Flask):
     cors.init_app(app)
     db.init_app(app)
-    migrate.init_app(app, db)
     flask_excel.init_excel(app)
 
 

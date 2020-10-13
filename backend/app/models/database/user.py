@@ -17,5 +17,9 @@ class User(Model):
     adjust = db.Column(db.Integer, nullable=False)
     description = db.Column(db.VARCHAR(255), nullable=False)
 
+    def to_dict(self):
+        return {**{c.name: getattr(self, c.name) for c in self.__table__.columns},
+                'adjust': '是' if self.adjust else '否'}
+
     def to_list(self) -> list:
         return [x for x in self.to_dict().values()]
