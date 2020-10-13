@@ -11,7 +11,7 @@
       >
     </div>
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-      <el-table :data="details" style="width:100vw" border>
+      <el-table :data="details" height="90vh" style="width:100vw" border>
         <el-table-column
           fixed
           prop="name"
