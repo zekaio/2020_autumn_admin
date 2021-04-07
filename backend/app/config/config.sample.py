@@ -1,32 +1,41 @@
 class BaseConfig:
-    admin_password = ''
-    departments = []
+    admin_password = '123456'
+    departments = ['技术部',
+                   '视觉设计部',
+                   '视频部',
+                   '行政人事部',
+                   '广播台',
+                   '新媒体部',
+                   '运营推广部' ]
 
 
-DatabaseConfig = dict(
-    username='',
-    password='',
-    host='localhost',
-    port=3306
-)
-
-dbname = {
-    'development': '',
-    'production': '',
-    'testing': ''
-}
+# DatabaseConfig = dict(
+#     username='',
+#     password='',
+#     host='localhost',
+#     port=3306
+# )
+#
+# dbname = {
+#     'development': '',
+#     'production': '',
+#     'testing': ''
+# }
 
 
 def get_database_url(env: str) -> str:
-    return 'mysql+mysqlconnector://{username}:{password}@{host}:{port}/{database}?charset=utf8mb4&collation=utf8mb4_general_ci'.format(
-        **DatabaseConfig, database=dbname[env])
+    # return 'mysql+mysqlconnector://{username}:{password}@{host}:{port}/{database}?charset=utf8mb4&collation=utf8mb4_general_ci'.format(
+    #     **DatabaseConfig, database=dbname[env])
+    return 'sqlite:///../test.db'
 
 
 class AppConfig:
-    SECRET_KEY = ''
+    SECRET_KEY = 'hfakhfkaagq132'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     SQLALCHEMY_RECORD_QUERIES = True
     DEBUG = False
+    SESSION_COOKIE_SAMESITE = "None"
+    SESSION_COOKIE_SECURE = True
 
 
 class AppConfigDev(AppConfig):

@@ -38,7 +38,7 @@ def update_detail():
 @admin_bp.route('/user/excel')
 def get_excel():
     return excel.make_response_from_array([
-        ['姓名', '手机号', '性别', '年级', '校区', '学院', '宿舍', '第一志愿', '第二志愿', '服从调剂', '自我介绍'],
+        ['姓名', '手机号', '性别', '年级', '校区', '学院', '宿舍', '第一志愿', '第二志愿', '服从调剂', '自我介绍', '邮箱'],
         *database.get_all_users()
     ],
         file_type='xlsx',
